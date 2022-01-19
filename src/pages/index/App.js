@@ -8,6 +8,7 @@ import {Physics, useBox, usePlane} from "@react-three/cannon";
 import luggage from '../../assets/Luggage.obj';
 import luggageSecond from '../../assets/Suitcase.c4d.fbx';
 import {useDrag} from "react-use-gesture";
+import * as THREE from 'three'
 
 
 function Luggage() {
@@ -24,24 +25,27 @@ function LuggageSecond() {
     return <primitive object={fbx} position={[-40, 10, 0]} scale={[0.1, 0.1, 0.15]}/>
 }
 
+
 function Box(props) {
     const [mouseHov, setMouseHov] = useState(false);
     const [position, setPosition] = useState(props.phPos);
     const {size, viewport} = useThree();
     const aspect = size.width / viewport.width;
 
-    const bind = useDrag(({offset: [x, y]}) => {
-        const [, , z] = position;
-        setPosition([x / aspect, -y / aspect, z]);
-    }, {pointerEvents: true});
+    /*   const bind = useDrag(({offset: [x, y]}) => {
+           const [, , z] = position;
+           setPosition([x / aspect, -y / aspect, z]);
+       }, {pointerEvents: true});
+   */
+
 
     const [ref,] = useBox(() => ({mass: 1, position: /*props.phPos*/ position, args: props.size}))
-    return <mesh {...bind()}
-                 onPointerOver={() => setMouseHov(true)}
-                 onPointerOut={() => setMouseHov(false)}
-                 castShadow
-                 position={/*props.phPos*/ position}
-                 ref={ref}
+    return <mesh /*{...bind()}*/
+        onPointerOver={() => setMouseHov(true)}
+        onPointerOut={() => setMouseHov(false)}
+        castShadow
+        position={/*props.phPos*/ position}
+        ref={ref}
     >
         <boxBufferGeometry attach={'geometry'} args={props.size}/>
         <meshLambertMaterial attach={'material'}

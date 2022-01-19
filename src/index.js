@@ -9,6 +9,7 @@ import {
     Route
 } from "react-router-dom";
 import SecondPage from "./pages/SecondPage";
+import ScenePage from "./pages/ScenePage";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Routes>
                 <Route path="/" element={<App/>}/>
                 <Route path="/second" element={<SecondPage/>}/>
+                <Route path="/scene" element={<ScenePage/>}/>
             </Routes>
         </BrowserRouter>
     </React.StrictMode>,
